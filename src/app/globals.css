@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════
+   1. FONT-FACE DECLARATIONS
+   (Đảm bảo file đã nằm trong public/fonts/)
+   ══════════════════════════════════════════════ */
+/* Removed @font-face for Momo Trust */
+
+@layer base {
+  body {
+    /* Đảm bảo toàn bộ trang nhận diện font body */
+    @apply font-body antialiased;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   2. BASE STYLES
+   ══════════════════════════════════════════════ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    /* Áp dụng font body mặc định cho toàn trang */
+    @apply font-body antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+  }
+
+  /* Accessibility & Selection colors (MoMo Magenta) */
+  :focus-visible {
+    outline: 2px solid #a50064;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: #a50064;
+    color: white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════
+   3. COMPONENT CLASSES (Fix Width Toàn Trang)
+   ══════════════════════════════════════════════ */
+@layer components {
+
+  /* Class dùng chung để fix chiều rộng Desktop chuẩn 1280px */
+  .main-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative;
+  }
+
+  /* Helper cho Hero Title sử dụng font Display */
+  .text-hero-momo {
+    @apply font-display text-hero leading-tight tracking-tight;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   4. UTILITY CLASSES
+   ══════════════════════════════════════════════ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
