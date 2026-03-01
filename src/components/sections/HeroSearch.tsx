@@ -13,7 +13,7 @@ export function HeroSearch() {
     const searchRef = useRef<HTMLDivElement>(null);
     const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    const fullPlaceholder = "Bạn muốn đi đâu? (VD: Thái Lan, Nhật Bản)";
+    const fullPlaceholder = "Bạn muốn đi đâu?";
 
     // Hiệu ứng typing cho placeholder
     useEffect(() => {
@@ -72,17 +72,15 @@ export function HeroSearch() {
     }, []);
 
     return (
-        <div className="relative w-full px-4 sm:px-6 md:px-8 mt-6 sm:mt-8" ref={searchRef}>
-            <div className="max-w-2xl mx-auto">
+        <div className="relative w-full px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 lg:mt-10" ref={searchRef}>
+            <div className="max-w-3xl mx-auto">
                 <form
                     onSubmit={handleSearchSubmit}
-                    className="relative flex flex-col sm:flex-row items-center w-full bg-white rounded-full shadow-2xl overflow-hidden focus-within:ring-4 focus-within:ring-momo-500/30 transition-all"
+                    className="relative flex items-center w-full h-auto sm:h-14 lg:h-16 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow overflow-hidden focus-within:ring-2 focus-within:ring-momo-500 focus-within:ring-offset-2"
                 >
                     {/* Search Icon */}
-                    <div className="pl-4 sm:pl-6 text-gray-400 flex-shrink-0">
+                    <div className="pl-4 sm:pl-5 lg:pl-6 pr-2 text-gray-400 flex-shrink-0">
                         <svg 
-                            width="20" 
-                            height="20" 
                             className="w-5 h-5 sm:w-6 sm:h-6" 
                             viewBox="0 0 24 24" 
                             fill="none" 
@@ -97,10 +95,10 @@ export function HeroSearch() {
                     </div>
 
                     {/* Input Field */}
-                    <div className="relative flex-1 w-full min-w-0">
+                    <div className="relative flex-1 min-w-0">
                         <input
                             type="text"
-                            className="w-full appearance-none bg-transparent px-3 sm:px-4 py-3 sm:py-4 text-sm sm:text-base lg:text-lg text-gray-900 placeholder-gray-500 focus:outline-none font-body break-words whitespace-normal"
+                            className="w-full h-12 sm:h-14 lg:h-16 appearance-none bg-transparent px-2 sm:px-3 lg:px-4 text-sm sm:text-base lg:text-lg text-gray-900 placeholder-gray-400 focus:outline-none font-body"
                             placeholder={displayText || "Bạn muốn đi đâu?"}
                             value={searchQuery}
                             onChange={(e) => {
@@ -114,18 +112,12 @@ export function HeroSearch() {
                                 }
                             }}
                         />
-                        {!searchQuery && displayText.length < fullPlaceholder.length && (
-                            <span className="absolute left-3 sm:left-4 top-3 sm:top-4 text-gray-400 text-sm sm:text-base lg:text-lg pointer-events-none font-body truncate max-w-xs">
-                                {displayText}
-                                <span className="animate-pulse">|</span>
-                            </span>
-                        )}
                     </div>
 
                     {/* Search Button */}
                     <button
                         type="submit"
-                        className="w-full sm:w-auto bg-momo-600 hover:bg-momo-700 active:bg-momo-800 text-white px-6 sm:px-8 py-3 sm:py-4 font-bold transition-colors text-sm sm:text-base flex-shrink-0 rounded-full sm:rounded-none mt-2 sm:mt-0"
+                        className="h-full bg-momo-600 hover:bg-momo-700 active:bg-momo-800 text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 font-bold transition-colors text-xs sm:text-sm lg:text-base flex-shrink-0 whitespace-nowrap"
                     >
                         Tìm kiếm
                     </button>
@@ -133,13 +125,13 @@ export function HeroSearch() {
 
                 {/* Bảng gợi ý (Suggestions Dropdown) */}
                 {showSuggestions && searchQuery.length > 0 && filteredSuggestions.length > 0 && (
-                    <div className="absolute top-full left-4 right-4 sm:left-6 sm:right-6 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 text-left animate-in fade-in slide-in-from-top-4 duration-200"> 
-                        <ul className="py-2 max-h-96 overflow-y-auto">
+                    <div className="absolute top-full left-4 right-4 sm:left-6 sm:right-6 lg:left-8 lg:right-8 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 animate-in fade-in slide-in-from-top-2 duration-200"> 
+                        <ul className="py-2 max-h-72 sm:max-h-96 overflow-y-auto">
                             {filteredSuggestions.map((term, idx) => (
                                 <li key={idx}>
                                     <button
                                         type="button"
-                                        className="w-full text-left px-4 sm:px-6 py-3 hover:bg-momo-50 hover:text-momo-600 transition-colors text-gray-700 flex items-center gap-3 font-body text-sm sm:text-base active:bg-momo-100"
+                                        className="w-full text-left px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 hover:bg-momo-50 hover:text-momo-600 transition-colors text-gray-700 flex items-center gap-3 font-body text-xs sm:text-sm lg:text-base active:bg-momo-100"
                                         onClick={() => {
                                             setSearchQuery(term);
                                             setShowSuggestions(false);
@@ -151,7 +143,7 @@ export function HeroSearch() {
                                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                             <circle cx="12" cy="10" r="3"></circle>
                                         </svg>
-                                        <span className="truncate text-sm sm:text-base">{term}</span>
+                                        <span className="truncate">{term}</span>
                                     </button>
                                 </li>
                             ))}
