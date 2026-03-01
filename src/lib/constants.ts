@@ -68,9 +68,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'SIM Du lịch', href: '/esim' },
   { label: 'Vé máy bay', href: '/ve-may-bay' },
   { label: 'Khách sạn', href: '/khach-san' },
-  { label: 'Thanh toán', href: '#thanh-toan' },
-  { label: 'So sánh', href: '#so-sanh' },
-  { label: 'FAQ', href: '#faq' },
 ];
 
 /* ── Travel Services (Value Proposition) ─────── */

@@ -37,8 +37,8 @@ export function Header() {
       className="sticky top-0 z-50 w-full border-b border-[var(--border-default)] bg-[var(--bg-primary)]/80 backdrop-blur-lg"
       role="banner"
     >
-      <div className="container-content">
-        <div className="flex h-16 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-[4.5rem] items-center justify-between">
           {/* ── Logo ────────────────────────── */}
           <Link
             href="/"

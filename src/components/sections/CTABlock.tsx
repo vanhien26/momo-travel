@@ -63,8 +63,9 @@ export function CTABlock({
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Button
             href={SITE_CONFIG.appDeepLink}
+            variant="ghost"
             size="lg"
-            className="relative bg-white text-momo-700 shadow-2xl hover:bg-white/95 text-lg px-10 py-5 font-extrabold animate-pulse-glow"
+            className="relative bg-white !text-momo-700 shadow-2xl hover:bg-gray-100 hover:scale-105 text-lg px-10 py-5 font-extrabold animate-pulse-glow transition-all"
             ariaLabel={isDefault ? 'Tải MoMo và nhận gói quà 500K' : 'Mở ứng dụng MoMo ngay'}
           >
             {isDefault ? '🎁 Nhận Quà 500K Ngay' : 'Mở App MoMo'}
@@ -78,20 +79,20 @@ export function CTABlock({
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Button
             href={SITE_CONFIG.appStoreUrl}
-            variant="secondary"
+            variant="ghost"
             size="md"
             isExternal
-            className="border-white/30 text-white hover:bg-white/10 dark:border-white/30 dark:text-white"
+            className="border-2 border-white/30 !text-white hover:bg-white/15 hover:scale-105 transition-all"
             ariaLabel="Tải MoMo từ App Store"
           >
             App Store
           </Button>
           <Button
             href={SITE_CONFIG.playStoreUrl}
-            variant="secondary"
+            variant="ghost"
             size="md"
             isExternal
-            className="border-white/30 text-white hover:bg-white/10 dark:border-white/30 dark:text-white"
+            className="border-2 border-white/30 !text-white hover:bg-white/15 hover:scale-105 transition-all"
             ariaLabel="Tải MoMo từ Google Play"
           >
             Google Play

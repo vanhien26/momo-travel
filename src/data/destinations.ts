@@ -41,8 +41,8 @@ export interface DestinationDetail {
 
 export const FEATURED_DESTINATIONS: FeaturedDestination[] = [
     // Domestic
-    { slug: 'phu-quoc', name: 'Phú Quốc', image: 'https://images.unsplash.com/photo-1596701553314-5d5d8360d844?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 790000, type: 'domestic', hotelPrice: 1200000 },
-    { slug: 'da-lat', name: 'Đà Lạt', image: 'https://images.unsplash.com/photo-1582239328290-79883652de6a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 590000, type: 'domestic', hotelPrice: 800000 },
+    { slug: 'phu-quoc', name: 'Phú Quốc', image: 'https://images.unsplash.com/photo-1570653638698-4d0d0e007cba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 790000, type: 'domestic', hotelPrice: 1200000 },
+    { slug: 'da-lat', name: 'Đà Lạt', image: 'https://images.unsplash.com/photo-1555921015-5532091f6026?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 590000, type: 'domestic', hotelPrice: 800000 },
     { slug: 'da-nang', name: 'Đà Nẵng', image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 650000, type: 'domestic', hotelPrice: 900000 },
     { slug: 'sapa', name: 'Sapa', image: 'https://images.unsplash.com/photo-1549487922-2580798e16ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 450000, type: 'domestic', hotelPrice: 750000 },
     { slug: 'nha-trang', name: 'Nha Trang', image: 'https://images.unsplash.com/photo-1574227492706-f65b24c3688a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 600000, type: 'domestic', hotelPrice: 850000 },
@@ -54,7 +54,7 @@ export const FEATURED_DESTINATIONS: FeaturedDestination[] = [
     // International
     { slug: 'thai-lan', name: 'Thái Lan', image: 'https://images.unsplash.com/photo-1490077476659-095159692ab5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 1200000, type: 'international', esimPrice: 120000, hotelPrice: 950000, momoPaySupported: true },
     { slug: 'nhat-ban', name: 'Nhật Bản', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 5500000, type: 'international', esimPrice: 180000, hotelPrice: 2100000, momoPaySupported: true },
-    { slug: 'han-quoc', name: 'Hàn Quốc', image: 'https://images.unsplash.com/photo-1546874177-9e664bf3ea9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 4200000, type: 'international', esimPrice: 150000, hotelPrice: 1800000, momoPaySupported: true },
+    { slug: 'han-quoc', name: 'Hàn Quốc', image: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 4200000, type: 'international', esimPrice: 150000, hotelPrice: 1800000, momoPaySupported: true },
     { slug: 'singapore', name: 'Singapore', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 2100000, type: 'international', esimPrice: 130000, hotelPrice: 3200000, momoPaySupported: true },
     { slug: 'bali', name: 'Bali', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 3100000, type: 'international', esimPrice: 99000, hotelPrice: 1500000 },
     { slug: 'dai-loan', name: 'Đài Loan', image: 'https://images.unsplash.com/photo-1552993873-195b0595bd49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 3500000, type: 'international', esimPrice: 140000, hotelPrice: 1600000 },
