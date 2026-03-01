@@ -286,34 +286,34 @@ export const COMPARISON_DATA: ComparisonRow[] = [
  */
 export const FAQ_DATA: FAQItem[] = [
   {
-    question: 'MoMo có thể thanh toán ở những nước nào tại châu Á?',
+    question: 'Cách dùng Ví Trả Sau mua vé máy bay trên MoMo như thế nào?',
     answer:
-      'MoMo cho phép thanh toán QR tại hàng triệu điểm bán ở Nhật Bản, Hàn Quốc, Thái Lan, Singapore, Malaysia, Campuchia và nhiều quốc gia khác tại châu Á. Bạn chỉ cần mở app MoMo, quét mã QR tại cửa hàng và thanh toán bằng số dư ví hoặc thẻ liên kết. Tỷ giá được quy đổi tự động theo rate thị trường, không có phí giao dịch quốc tế ẩn.',
+      'Để dùng Ví Trả Sau mua vé máy bay trên MoMo, bạn vào mục "Vé máy bay" → chọn chuyến bay → ở bước thanh toán chọn "Ví Trả Sau" làm phương thức thanh toán. Hạn mức lên đến 10 triệu đồng, trả góp 0% lãi suất trong 3 tháng. Bạn cần đăng ký và được duyệt Ví Trả Sau trước khi sử dụng.',
   },
   {
-    question: 'Cách mua SIM du lịch quốc tế trên MoMo như thế nào?',
+    question: 'Thanh toán MoMo tại Nhật Bản như thế nào?',
     answer:
-      'Bạn mua SIM du lịch quốc tế trên MoMo chỉ trong 3 bước: Mở app MoMo → Chọn "SIM Du lịch" → Chọn quốc gia và gói data → Thanh toán. Với eSIM, bạn nhận mã kích hoạt trong vòng 60 giây qua app mà không cần thay SIM vật lý. Gói data phủ sóng 4G/5G tại hơn 30 quốc gia, giá từ 99.000đ cho 7 ngày unlimited.',
+      'Tại Nhật Bản, bạn thanh toán bằng MoMo qua mã QR tại hàng triệu điểm bán bao gồm Don Quijote, 7-Eleven, Lawson, FamilyMart và nhiều cửa hàng khác. Mở app MoMo → chọn "Quét mã" → quét mã QR tại quầy thanh toán. Tỷ giá JPY/VND được quy đổi tự động theo rate thị trường, không phí ẩn.',
   },
   {
-    question: 'Đặt vé máy bay trên MoMo có rẻ hơn các nền tảng khác không?',
+    question: 'Mua eSIM du lịch Hàn Quốc trên MoMo có uy tín không?',
     answer:
-      'MoMo tổng hợp giá vé từ 50+ hãng bay bao gồm Vietnam Airlines, VietJet, Bamboo Airways và các hãng quốc tế, giúp bạn so sánh và chọn giá tốt nhất. Ngoài ra, MoMo thường xuyên có chương trình hoàn tiền lên đến 5% khi đặt vé bay, tích điểm thưởng và voucher giảm giá độc quyền chỉ có trên nền tảng MoMo.',
+      'Có, eSIM du lịch Hàn Quốc trên MoMo sử dụng mạng SK Telecom — nhà mạng lớn nhất Hàn Quốc với độ phủ sóng 4G/5G trên 99%. Kích hoạt tức thì trong 60 giây qua app, giá từ 150.000đ cho 7 ngày unlimited data. MoMo đảm bảo hoàn tiền nếu eSIM không hoạt động.',
   },
   {
-    question: 'Đặt khách sạn qua MoMo có được miễn phí hủy không?',
+    question: 'So sánh giá vé máy bay trên MoMo với Traveloka và Booking?',
     answer:
-      'Có, rất nhiều khách sạn trên MoMo cho phép miễn phí hủy phòng. Khi tìm kiếm khách sạn, bạn có thể bật bộ lọc "Miễn phí hủy" để chỉ hiển thị các lựa chọn linh hoạt. MoMo cũng cam kết giá tốt nhất thị trường – nếu bạn tìm được giá rẻ hơn ở nền tảng khác, MoMo sẽ hoàn tiền phần chênh lệch.',
+      'MoMo tổng hợp giá vé từ 50+ hãng bay giống Traveloka và Booking, nhưng có thêm ưu đãi hoàn tiền lên đến 5% qua ví MoMo và tích điểm XU đổi voucher. Nhiều chương trình flash sale độc quyền chỉ có trên MoMo giúp giá vé cạnh tranh hơn.',
   },
   {
-    question: 'MoMo có an toàn khi thanh toán ở nước ngoài không?',
+    question: 'Đặt khách sạn Thái Lan qua MoMo có miễn phí hủy không?',
     answer:
-      'MoMo đạt chứng nhận bảo mật quốc tế PCI DSS Level 1 – tiêu chuẩn cao nhất ngành thanh toán. Mọi giao dịch quốc tế được mã hóa end-to-end, xác thực bằng vân tay/FaceID, và có hệ thống chống gian lận AI realtime. Bạn cũng có thể đặt hạn mức chi tiêu du lịch và nhận thông báo mỗi giao dịch.',
+      'Có, rất nhiều khách sạn Thái Lan trên MoMo cho phép miễn phí hủy phòng. Khi tìm kiếm, bật bộ lọc "Miễn phí hủy" để chỉ hiển thị lựa chọn linh hoạt. MoMo cam kết giá tốt nhất — nếu tìm được giá rẻ hơn ở nền tảng khác, MoMo hoàn tiền chênh lệch.',
   },
   {
-    question: 'Tỷ giá quy đổi khi thanh toán bằng MoMo ở nước ngoài tính thế nào?',
+    question: 'Tích XU MoMo khi đặt dịch vụ du lịch được bao nhiêu?',
     answer:
-      'Tỷ giá quy đổi khi dùng MoMo ở nước ngoài được cập nhật theo rate thị trường realtime, hiển thị rõ ràng trước khi bạn xác nhận thanh toán. MoMo không thu phí giao dịch quốc tế ẩn hay markup tỷ giá. Bạn có thể xem lịch sử tỷ giá và quản lý chi tiêu ngoại tệ trực tiếp trong app.',
+      'Mỗi giao dịch du lịch trên MoMo đều được tích XU: Vé máy bay tích 1-5% giá trị, khách sạn tích 2-3%, eSIM tích 500-1.000 XU/giao dịch. XU có thể đổi voucher giảm giá cho lần đặt tiếp theo hoặc sử dụng cho các dịch vụ khác trên MoMo.',
   },
 ];
 

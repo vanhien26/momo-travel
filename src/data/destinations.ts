@@ -8,6 +8,12 @@ export interface FeaturedDestination {
     image: string;
     priceFrom: number;
     type: DestinationType;
+    /** Giá eSIM tham khảo (VNĐ) */
+    esimPrice?: number;
+    /** Giá khách sạn tham khảo/đêm (VNĐ) */
+    hotelPrice?: number;
+    /** Hỗ trợ thanh toán MoMo tại quầy */
+    momoPaySupported?: boolean;
 }
 
 export interface DestinationDetail {
@@ -35,26 +41,26 @@ export interface DestinationDetail {
 
 export const FEATURED_DESTINATIONS: FeaturedDestination[] = [
     // Domestic
-    { slug: 'phu-quoc', name: 'Phú Quốc', image: 'https://images.unsplash.com/photo-1596701553314-5d5d8360d844?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 790000, type: 'domestic' },
-    { slug: 'da-lat', name: 'Đà Lạt', image: 'https://images.unsplash.com/photo-1582239328290-79883652de6a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 590000, type: 'domestic' },
-    { slug: 'da-nang', name: 'Đà Nẵng', image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 650000, type: 'domestic' },
-    { slug: 'sapa', name: 'Sapa', image: 'https://images.unsplash.com/photo-1549487922-2580798e16ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 450000, type: 'domestic' },
-    { slug: 'nha-trang', name: 'Nha Trang', image: 'https://images.unsplash.com/photo-1574227492706-f65b24c3688a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 600000, type: 'domestic' },
-    { slug: 'ha-noi', name: 'Hà Nội', image: 'https://images.unsplash.com/photo-1555921015-5532091f6026?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 850000, type: 'domestic' },
-    { slug: 'hoi-an', name: 'Hội An', image: 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 550000, type: 'domestic' },
-    { slug: 'hue', name: 'Huế', image: 'https://images.unsplash.com/photo-1583417646194-4b537d90d8a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 580000, type: 'domestic' },
-    { slug: 'vung-tau', name: 'Vũng Tàu', image: 'https://images.unsplash.com/photo-1601058269781-8b0103e33eab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 250000, type: 'domestic' },
+    { slug: 'phu-quoc', name: 'Phú Quốc', image: 'https://images.unsplash.com/photo-1596701553314-5d5d8360d844?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 790000, type: 'domestic', hotelPrice: 1200000 },
+    { slug: 'da-lat', name: 'Đà Lạt', image: 'https://images.unsplash.com/photo-1582239328290-79883652de6a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 590000, type: 'domestic', hotelPrice: 800000 },
+    { slug: 'da-nang', name: 'Đà Nẵng', image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 650000, type: 'domestic', hotelPrice: 900000 },
+    { slug: 'sapa', name: 'Sapa', image: 'https://images.unsplash.com/photo-1549487922-2580798e16ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 450000, type: 'domestic', hotelPrice: 750000 },
+    { slug: 'nha-trang', name: 'Nha Trang', image: 'https://images.unsplash.com/photo-1574227492706-f65b24c3688a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 600000, type: 'domestic', hotelPrice: 850000 },
+    { slug: 'ha-noi', name: 'Hà Nội', image: 'https://images.unsplash.com/photo-1555921015-5532091f6026?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 850000, type: 'domestic', hotelPrice: 700000 },
+    { slug: 'hoi-an', name: 'Hội An', image: 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 550000, type: 'domestic', hotelPrice: 650000 },
+    { slug: 'hue', name: 'Huế', image: 'https://images.unsplash.com/photo-1583417646194-4b537d90d8a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 580000, type: 'domestic', hotelPrice: 600000 },
+    { slug: 'vung-tau', name: 'Vũng Tàu', image: 'https://images.unsplash.com/photo-1601058269781-8b0103e33eab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 250000, type: 'domestic', hotelPrice: 500000 },
 
     // International
-    { slug: 'thai-lan', name: 'Thái Lan', image: 'https://images.unsplash.com/photo-1490077476659-095159692ab5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 1200000, type: 'international' },
-    { slug: 'nhat-ban', name: 'Nhật Bản', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 5500000, type: 'international' },
-    { slug: 'han-quoc', name: 'Hàn Quốc', image: 'https://images.unsplash.com/photo-1546874177-9e664bf3ea9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 4200000, type: 'international' },
-    { slug: 'singapore', name: 'Singapore', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 2100000, type: 'international' },
-    { slug: 'bali', name: 'Bali', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 3100000, type: 'international' },
-    { slug: 'dai-loan', name: 'Đài Loan', image: 'https://images.unsplash.com/photo-1552993873-195b0595bd49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 3500000, type: 'international' },
-    { slug: 'trung-quoc', name: 'Trung Quốc', image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 4800000, type: 'international' },
-    { slug: 'malaysia', name: 'Malaysia', image: 'https://images.unsplash.com/photo-1596422846146-5e5d3269b2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 1800000, type: 'international' },
-    { slug: 'philippines', name: 'Philippines', image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 2500000, type: 'international' },
+    { slug: 'thai-lan', name: 'Thái Lan', image: 'https://images.unsplash.com/photo-1490077476659-095159692ab5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 1200000, type: 'international', esimPrice: 120000, hotelPrice: 950000, momoPaySupported: true },
+    { slug: 'nhat-ban', name: 'Nhật Bản', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 5500000, type: 'international', esimPrice: 180000, hotelPrice: 2100000, momoPaySupported: true },
+    { slug: 'han-quoc', name: 'Hàn Quốc', image: 'https://images.unsplash.com/photo-1546874177-9e664bf3ea9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 4200000, type: 'international', esimPrice: 150000, hotelPrice: 1800000, momoPaySupported: true },
+    { slug: 'singapore', name: 'Singapore', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 2100000, type: 'international', esimPrice: 130000, hotelPrice: 3200000, momoPaySupported: true },
+    { slug: 'bali', name: 'Bali', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 3100000, type: 'international', esimPrice: 99000, hotelPrice: 1500000 },
+    { slug: 'dai-loan', name: 'Đài Loan', image: 'https://images.unsplash.com/photo-1552993873-195b0595bd49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 3500000, type: 'international', esimPrice: 140000, hotelPrice: 1600000 },
+    { slug: 'trung-quoc', name: 'Trung Quốc', image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 4800000, type: 'international', esimPrice: 160000, hotelPrice: 1200000 },
+    { slug: 'malaysia', name: 'Malaysia', image: 'https://images.unsplash.com/photo-1596422846146-5e5d3269b2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 1800000, type: 'international', esimPrice: 110000, hotelPrice: 1100000 },
+    { slug: 'philippines', name: 'Philippines', image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', priceFrom: 2500000, type: 'international', esimPrice: 99000, hotelPrice: 1300000 },
 ];
 
 export const DESTINATION_DETAILS: Record<string, DestinationDetail> = {

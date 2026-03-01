@@ -3,14 +3,14 @@
  *
  * Architecture:
  * - Server Component (default) – SSG cho performance
- * - Section ordering theo conversion funnel:
- *   1. Hero (awareness + keyword targeting)
- *   2. Value Proposition (interest)
- *   3. Use Cases (consideration)
- *   4. Trust Signals (trust building)
- *   5. Comparison (evaluation)
- *   6. FAQ (objection handling + GEO snippets)
- *   7. CTA (conversion → App download/open)
+ * - Section ordering theo AIDA (Attention-Interest-Desire-Action):
+ *   1. Hero (Attention: keyword targeting + typing effect)
+ *   2. Destination Grid (Interest: data-driven pricing)
+ *   3. Value Proposition / USP (Interest → Desire)
+ *   4. Promo Banners (Desire: ưu đãi hiện có)
+ *   5. Testimonials (Desire: social proof)
+ *   6. FAQ (Objection handling + GEO snippets)
+ *   7. CTA 500K (Action: conversion → App download)
  *
  * SEO Page Structure:
  * - 1 x H1 (in Hero)
@@ -25,25 +25,31 @@
  * ══════════════════════════════════════════════ */
 
 import { HeroSection } from '@/components/sections/HeroSection';
+import { DestinationGrid } from '@/components/sections/DestinationGrid';
 import { ValueProposition } from '@/components/sections/ValueProposition';
-import { UseCases } from '@/components/sections/UseCases';
+import { PromoBanners } from '@/components/sections/PromoBanners';
 import { TrustSignals } from '@/components/sections/TrustSignals';
-import { ComparisonTable } from '@/components/sections/ComparisonTable';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTABlock } from '@/components/sections/CTABlock';
 
 export default function HomePage() {
   return (
     <>
-      {/* ── Above the Fold ─────────────────── */}
+      {/* ── 1. ATTENTION ───────────────────── */}
       <HeroSection />
 
-      {/* ── Below the Fold ─────────────────── */}
+      {/* ── 2. INTEREST ────────────────────── */}
+      <DestinationGrid />
       <ValueProposition />
-      <UseCases />
+
+      {/* ── 3. DESIRE ──────────────────────── */}
+      <PromoBanners />
       <TrustSignals />
-      <ComparisonTable />
+
+      {/* ── 4. OBJECTION HANDLING ──────────── */}
       <FAQSection />
+
+      {/* ── 5. ACTION ──────────────────────── */}
       <CTABlock />
     </>
   );
