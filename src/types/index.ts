@@ -13,16 +13,35 @@ export interface TravelService {
   features: string[];
 }
 
-/** Điểm đến du lịch */
-export interface Destination {
-  id: string;
+/** Địa danh cụ thể (city/region) thuộc một quốc gia – dùng cho COUNTRIES */
+export interface Location {
   name: string;
-  country: string;
+  slug: string;
+  image: string;
+  /** Giá vé máy bay thấp nhất đến địa danh này */
+  flightPrice: number;
+  /** Giá khách sạn trung bình/đêm tại địa danh này */
+  hotelPrice: number;
+  /** Giá eSIM thấp nhất cho quốc gia/địa danh này */
+  eSimPrice: number;
+  description: string;
+  /** Đánh dấu địa danh nổi bật để ưu tiên hiển thị */
+  isPopular?: boolean;
+}
+
+/** Quốc gia – hub chính cho /diem-den */
+export interface Country {
+  name: string;
   slug: string;
   description: string;
-  imageUrl: string;
-  imageAlt: string;
-  tags: string[];
+  /** Ảnh hero đại diện cho quốc gia */
+  heroImage: string;
+  /** Quốc gia thuộc Châu Á hay không – phục vụ logic GEO */
+  isAsia: boolean;
+  /** Các quốc gia Châu Á được ưu tiên hỗ trợ thanh toán MoMo */
+  supportsMoMoPayment: boolean;
+  /** Danh sách các địa danh thuộc quốc gia này */
+  locations: Location[];
 }
 
 /** FAQ item – dùng cho cả UI và Schema markup */

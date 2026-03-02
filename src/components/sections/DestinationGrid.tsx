@@ -7,16 +7,26 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { FEATURED_DESTINATIONS, type FeaturedDestination } from '@/data/destinations';
+import { COUNTRIES } from '@/data/destinations';
+import type { Location } from '@/types';
 
-/* ── Chọn 8 điểm đến nổi bật ─────────────────── */
-const GRID_SLUGS_DOMESTIC = ['phu-quoc', 'da-lat', 'da-nang', 'nha-trang'];
-const GRID_SLUGS_INTERNATIONAL = ['nhat-ban', 'han-quoc', 'thai-lan', 'singapore'];
+type GridLocation = Location & {
+    countrySlug: string;
+    countryName: string;
+    supportsMoMoPayment: boolean;
+};
 
-const GRID_DESTINATIONS = [
-    ...FEATURED_DESTINATIONS.filter(d => GRID_SLUGS_DOMESTIC.includes(d.slug)),
-    ...FEATURED_DESTINATIONS.filter(d => GRID_SLUGS_INTERNATIONAL.includes(d.slug)),
-];
+/* ── Chọn các địa danh nổi bật từ COUNTRIES ─────────────────── */
+const GRID_LOCATIONS: GridLocation[] = COUNTRIES.flatMap((country) =>
+    country.locations
+        .filter((loc) => loc.isPopular)
+        .map((loc) => ({
+            ...loc,
+            countrySlug: country.slug,
+            countryName: country.name,
+            supportsMoMoPayment: country.supportsMoMoPayment,
+        })),
+).slice(0, 8);
 
 /* ── Format giá ──────────────────────────────── */
 function formatPrice(price: number): string {
@@ -49,8 +59,8 @@ export function DestinationGrid() {
 
                 {/* ── Grid 4 cột ─────────────────────── */}
                 <div className="mt-12 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                    {GRID_DESTINATIONS.map((dest) => (
-                        <DestinationCard key={dest.slug} destination={dest} />
+                    {GRID_LOCATIONS.map((loc) => (
+                        <DestinationCard key={`${loc.countrySlug}-${loc.slug}`} destination={loc} />
                     ))}
                 </div>
             </div>
@@ -59,12 +69,22 @@ export function DestinationGrid() {
 }
 
 /* ── Destination Card ────────────────────────── */
-function DestinationCard({ destination }: { destination: FeaturedDestination }) {
-    const { slug, name, image, priceFrom, esimPrice, hotelPrice, momoPaySupported } = destination;
+function DestinationCard({ destination }: { destination: GridLocation }) {
+    const {
+        slug,
+        countrySlug,
+        countryName,
+        name,
+        image,
+        flightPrice,
+        hotelPrice,
+        eSimPrice,
+        supportsMoMoPayment,
+    } = destination;
 
     return (
         <Link
-            href={`/diem-den/${slug}`}
+            href={`/diem-den/${countrySlug}/${slug}`}
             className="group relative flex flex-col overflow-hidden rounded-3xl bg-[var(--bg-primary)] shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
         >
             {/* ── Image + Badge ────────────────────── */}
@@ -84,15 +104,27 @@ function DestinationCard({ destination }: { destination: FeaturedDestination }) 
                     <h3 className="text-xl font-bold text-white drop-shadow-lg">
                         {name}
                     </h3>
+                    <p className="text-xs text-white/80">
+                        {countryName}
+                    </p>
                 </div>
 
-                {/* Badge MoMo Pay */}
-                {momoPaySupported && (
-                    <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-momo-700/90 backdrop-blur-sm px-3 py-1 text-[11px] font-semibold text-white shadow-lg">
-                        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        </svg>
-                        MoMo Pay ✅
+                {/* Badges: MoMo Pay + Ví Trả Sau */}
+                {supportsMoMoPayment && (
+                    <div className="absolute top-3 right-3 flex flex-col gap-1.5">
+                        <span className="flex items-center gap-1 rounded-full bg-momo-700/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-semibold text-white shadow-lg">
+                            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            MoMo Pay
+                        </span>
+                        <span className="flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-semibold text-momo-700 shadow-lg">
+                            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                <rect x="1" y="4" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                                <path d="M1 7h14" stroke="currentColor" strokeWidth="1.5"/>
+                            </svg>
+                            Trả Sau
+                        </span>
                     </div>
                 )}
             </div>
@@ -107,18 +139,30 @@ function DestinationCard({ destination }: { destination: FeaturedDestination }) 
                             Vé máy bay
                         </span>
                         <span className="font-semibold text-momo-700">
-                            từ {formatPrice(priceFrom)}
+                            từ {formatPrice(flightPrice)}
                         </span>
                     </div>
                     {/* eSIM */}
-                    {esimPrice && (
+                    {typeof eSimPrice === 'number' && eSimPrice > 0 && (
                         <div className="flex items-center justify-between text-sm">
                             <span className="flex items-center gap-2 text-[var(--text-secondary)]">
                                 <span aria-hidden="true">📡</span>
                                 eSIM
                             </span>
                             <span className="font-semibold text-momo-700">
-                                từ {formatPrice(esimPrice)}
+                                từ {formatPrice(eSimPrice)}
+                            </span>
+                        </div>
+                    )}
+                    {/* eSIM miễn phí (giá 0) */}
+                    {typeof eSimPrice === 'number' && eSimPrice === 0 && (
+                        <div className="flex items-center justify-between text-sm">
+                            <span className="flex items-center gap-2 text-[var(--text-secondary)]">
+                                <span aria-hidden="true">📡</span>
+                                eSIM
+                            </span>
+                            <span className="font-semibold text-momo-700">
+                                Miễn phí
                             </span>
                         </div>
                     )}

@@ -4,35 +4,59 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FEATURED_DESTINATIONS, POPULAR_SEARCH_TERMS, type DestinationType } from '@/data/destinations';
+import { COUNTRIES, POPULAR_SEARCH_TERMS } from '@/data/destinations';
 import { Button } from '@/components/ui/Button';
 
 export default function DestinationHubPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [activeTab, setActiveTab] = useState<DestinationType>('domestic');
     const router = useRouter();
     const searchRef = useRef<HTMLDivElement>(null);
 
-    const [visibleItems, setVisibleItems] = useState(8);
-
-    const filteredSuggestions = POPULAR_SEARCH_TERMS.filter(term =>
-        term.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredSuggestions = POPULAR_SEARCH_TERMS.filter((term) =>
+        term.toLowerCase().includes(searchQuery.toLowerCase()),
     );
 
-    const displayedDestinations = FEATURED_DESTINATIONS.filter(dest => dest.type === activeTab);
-    const visibleDestinations = displayedDestinations.slice(0, visibleItems);
+    const slugify = (value: string) =>
+        value
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/đ/g, 'd');
 
-    const handleLoadMore = () => {
-        setVisibleItems(prev => prev + 8);
+    const navigateBySearchSlug = (raw: string) => {
+        const slug = slugify(raw);
+
+        const allLocations = COUNTRIES.flatMap((country) =>
+            country.locations.map((loc) => ({
+                ...loc,
+                countrySlug: country.slug,
+            })),
+        );
+
+        // 1. Ưu tiên khớp Quốc gia
+        const country = COUNTRIES.find((c) => c.slug === slug);
+        if (country) {
+            router.push(`/diem-den/${country.slug}`);
+            return;
+        }
+
+        // 2. Nếu không phải quốc gia: tìm Địa danh và build URL lồng nhau
+        const location = allLocations.find((loc) => loc.slug === slug);
+        if (location) {
+            router.push(`/diem-den/${location.countrySlug}/${location.slug}`);
+            return;
+        }
+
+        // Fallback: vẫn đẩy về slug phẳng (legacy)
+        router.push(`/diem-den/${slug}`);
     };
 
     const handleSearchSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            // Basic slugification for demo purpose. Real app would use a proper library.
-            const slug = searchQuery.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/đ/g, 'd');
-            router.push(`/diem-den/${slug}`);
+            navigateBySearchSlug(searchQuery);
         }
     };
 
@@ -59,10 +83,10 @@ export default function DestinationHubPage() {
 
                 <div className="relative z-20 container-content max-w-4xl text-center">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg tracking-tight">
-                        Khám phá thế giới cùng <span className="text-momo-400">MoMo Travel</span>
+                        Khám phá điểm đến theo <span className="text-momo-400">Quốc Gia</span>
                     </h1>
                     <p className="text-xl text-white/90 mb-10 drop-shadow-md max-w-2xl mx-auto">
-                        Đặt vé máy bay, phòng khách sạn, eSIM dễ dàng. Tìm kiếm điểm đến mơ ước của bạn ngay hôm nay.
+                        Chọn quốc gia bạn muốn đến, sau đó khám phá các địa danh nổi bật như Đà Lạt, Sapa, Tokyo, Bangkok…
                     </p>
 
                     <div className="relative max-w-2xl mx-auto w-full" ref={searchRef}>
@@ -76,7 +100,7 @@ export default function DestinationHubPage() {
                             <input
                                 type="text"
                                 className="w-full flex-1 appearance-none bg-transparent px-4 py-5 text-lg text-gray-900 placeholder-gray-500 focus:outline-none"
-                                placeholder="Bạn muốn đi đâu? (VD: Thái Lan, Nhật Bản)"
+                                placeholder="Bạn muốn đi đâu? (VD: Việt Nam, Đà Lạt, Thái Lan)"
                                 value={searchQuery}
                                 onChange={(e) => {
                                     setSearchQuery(e.target.value);
@@ -104,8 +128,7 @@ export default function DestinationHubPage() {
                                                 onClick={() => {
                                                     setSearchQuery(term);
                                                     setShowSuggestions(false);
-                                                    const slug = term.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/đ/g, 'd');
-                                                    router.push(`/diem-den/${slug}`);
+                                                    navigateBySearchSlug(term);
                                                 }}
                                             >
                                                 <svg className="text-gray-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -123,68 +146,68 @@ export default function DestinationHubPage() {
                 </div>
             </section>
 
-            {/* 2. Featured Destinations */}
+            {/* 2. Danh sách Quốc gia */}
             <section className="py-20 bg-[var(--bg-primary)]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-6">Mục Tiêu Vi Vu Tiếp Theo</h2>
-
-                        {/* Tabs */}
-                        <div className="inline-flex items-center justify-center p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                            <button
-                                onClick={() => setActiveTab('domestic')}
-                                className={`px-8 py-3 rounded-md text-sm sm:text-base font-semibold transition-all ${activeTab === 'domestic'
-                                    ? 'bg-white dark:bg-gray-700 text-momo-600 dark:text-momo-400 shadow-sm'
-                                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                                    }`}
-                            >
-                                Trong nước
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('international')}
-                                className={`px-8 py-3 rounded-md text-sm sm:text-base font-semibold transition-all ${activeTab === 'international'
-                                    ? 'bg-white dark:bg-gray-700 text-momo-600 dark:text-momo-400 shadow-sm'
-                                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                                    }`}
-                            >
-                                Quốc tế
-                            </button>
-                        </div>
+                        <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">Chọn Quốc Gia Bạn Muốn Đến</h2>
+                        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+                            Mỗi quốc gia là một hub tổng hợp mọi địa danh nổi bật, vé máy bay, khách sạn và eSIM tương ứng.
+                        </p>
                     </div>
 
-                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        {visibleDestinations.map((dest, idx) => (
-                            <Link href={`/diem-den/${dest.slug}`} key={dest.slug} className="group relative block overflow-hidden rounded-2xl aspect-[3/4]">
-                                <div className="absolute inset-0 bg-gray-200 overflow-hidden">
-                                    <Image
-                                        src={dest.image}
-                                        alt={dest.name}
-                                        fill
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                        priority={idx < 4}
-                                    />
-                                </div>
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                    <h3 className="text-2xl font-bold mb-1">{dest.name}</h3>
-                                    <p className="text-sm text-gray-300 font-medium">Vé máy bay chỉ từ {dest.priceFrom.toLocaleString('vi-VN')}đ</p>
-                                </div>
-                            </Link>
-                        ))}
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {COUNTRIES.map((country) => {
+                            const locations = country.locations;
+                            return (
+                                <Link
+                                    key={country.slug}
+                                    href={`/diem-den/${country.slug}`}
+                                    className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-800"
+                                >
+                                    <div className="relative h-48 w-full overflow-hidden">
+                                        <Image
+                                            src={country.heroImage}
+                                            alt={country.name}
+                                            fill
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                                        <div className="absolute bottom-4 left-4 right-4">
+                                            <h3 className="text-2xl font-bold text-white mb-1">{country.name}</h3>
+                                            <p className="text-sm text-white/80">
+                                                {locations.length} địa danh nổi bật
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="p-5 flex-1 flex flex-col text-left">
+                                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
+                                            {country.description}
+                                        </p>
+                                        {locations.length > 0 && (
+                                            <div className="mt-auto pt-3 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400 flex flex-wrap gap-1">
+                                                <span className="font-semibold mr-1">Địa danh nổi bật:</span>
+                                                {locations.slice(0, 3).map((loc) => (
+                                                    <span
+                                                        key={loc.slug}
+                                                        className="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5"
+                                                    >
+                                                        {loc.name}
+                                                    </span>
+                                                ))}
+                                                {locations.length > 3 && (
+                                                    <span className="ml-1 text-xs text-momo-600 dark:text-momo-400">
+                                                        +{locations.length - 3} địa danh khác
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                </Link>
+                            );
+                        })}
                     </div>
-
-                    {visibleItems < displayedDestinations.length && (
-                        <div className="mt-12 text-center">
-                            <Button
-                                variant="secondary"
-                                onClick={handleLoadMore}
-                                className="px-8 bg-white border-2 border-momo-700 text-momo-700 hover:bg-momo-700 hover:text-white transition-colors"
-                            >
-                                Xem Thêm ({displayedDestinations.length - visibleItems} điểm đến khác)
-                            </Button>
-                        </div>
-                    )}
                 </div>
             </section>
 

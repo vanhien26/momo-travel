@@ -3,16 +3,28 @@
 @tailwind utilities;
 
 /* ══════════════════════════════════════════════
-   1. FONT-FACE DECLARATIONS
-   (Đảm bảo file đã nằm trong public/fonts/)
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
    ══════════════════════════════════════════════ */
-/* Removed @font-face for Momo Trust */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-default: #e2e8f0;
+  --border-strong: #cbd5e1;
+}
 
-@layer base {
-  body {
-    /* Đảm bảo toàn bộ trang nhận diện font body */
-    @apply font-body antialiased;
-  }
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-default: #334155;
+  --border-strong: #475569;
 }
 
 /* ══════════════════════════════════════════════
@@ -27,11 +39,11 @@
   }
 
   body {
-    /* Áp dụng font body mặc định cho toàn trang */
-    @apply font-body antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+    @apply font-body antialiased;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
   }
 
-  /* Accessibility & Selection colors (MoMo Magenta) */
   :focus-visible {
     outline: 2px solid #a50064;
     outline-offset: 2px;
@@ -44,13 +56,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -59,18 +66,17 @@
 }
 
 /* ══════════════════════════════════════════════
-   3. COMPONENT CLASSES (Fix Width Toàn Trang)
+   3. COMPONENT CLASSES
    ══════════════════════════════════════════════ */
 @layer components {
-
-  /* Class dùng chung để fix chiều rộng Desktop chuẩn 1280px */
-  .main-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative;
+  .container-content {
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-8;
+    max-width: 1200px;
   }
 
-  /* Helper cho Hero Title sử dụng font Display */
-  .text-hero-momo {
-    @apply font-display text-hero leading-tight tracking-tight;
+  .main-container {
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-8;
+    max-width: 1280px;
   }
 }
 
@@ -78,35 +84,22 @@
    4. UTILITY CLASSES
    ══════════════════════════════════════════════ */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
+  .text-balance { text-wrap: balance; }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
 }
 
 /* ══════════════════════════════════════════════
-   5. CUSTOM ANIMATIONS
+   5. ANIMATIONS
    ══════════════════════════════════════════════ */
 @keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 8px rgba(165, 0, 100, 0.3), 0 0 24px rgba(165, 0, 100, 0.15);
-  }
-
-  50% {
-    box-shadow: 0 0 16px rgba(165, 0, 100, 0.5), 0 0 48px rgba(165, 0, 100, 0.25);
-  }
+  0%, 100% { box-shadow: 0 0 8px rgba(165,0,100,0.3), 0 0 24px rgba(165,0,100,0.15); }
+  50% { box-shadow: 0 0 16px rgba(165,0,100,0.5), 0 0 48px rgba(165,0,100,0.25); }
 }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
+.card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.card-lift:hover { transform: translateY(-4px); }

@@ -1,15 +1,6 @@
 /* ══════════════════════════════════════════════
- * HEADER – MoMo Travel Hub
- *
- * Features:
- * - Sticky header với blur backdrop
- * - Mobile hamburger menu (CSS-only, no JS library)
- * - CTA button deep link đến App MoMo
- * - Semantic nav element + ARIA labels
- *
- * Webview Optimization:
- * - Nhẹ, không dùng third-party menu library
- * - CSS backdrop-filter thay vì JS-based blur
+ * HEADER – MoMo Travel Hub v2
+ * Fix: CTA contrast, mobile UX, Ví Trả Sau badge
  * ══════════════════════════════════════════════ */
 
 'use client';
@@ -34,18 +25,18 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-[var(--border-default)] bg-[var(--bg-primary)]/80 backdrop-blur-lg"
+      className="sticky top-0 z-[100] w-full border-b border-gray-100/80 bg-white/95 backdrop-blur-lg"
       role="banner"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-[4.5rem] items-center justify-between">
-          {/* ── Logo ────────────────────────── */}
+        <div className="flex h-16 items-center justify-between">
+
+          {/* ── Logo ──────────────────────────── */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-momo-700 transition-colors hover:text-momo-600"
+            className="flex items-center gap-2.5 text-lg font-bold tracking-tight text-gray-900 transition-opacity hover:opacity-80"
             aria-label="MoMo Travel Hub – Trang chủ"
           >
-            {/* SVG Logo via Next/Image */}
             <Image
               src="https://homepage.momocdn.net/fileuploads/svg/momo-file-240411162904.svg"
               alt="MoMo Logo"
@@ -54,25 +45,24 @@ export function Header() {
               className="shrink-0"
               priority
             />
-            <span className="hidden sm:inline">MoMo Travel</span>
+            <span className="hidden font-display font-bold sm:inline-block">
+              MoMo Travel
+            </span>
           </Link>
 
-          {/* ── Desktop Navigation ──────────── */}
-          <nav
-            className="hidden items-center gap-1 md:flex"
-            aria-label="Menu chính"
-          >
+          {/* ── Desktop Nav ──────────────────── */}
+          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Menu chính">
             {NAV_LINKS.map((link) => {
-              const isActive = link.href.startsWith('/') && (pathname === link.href || pathname.startsWith(link.href + '/'));
-
+              const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`rounded-lg px-3 py-2 text-sm transition-colors hover:bg-momo-50 hover:text-momo-700 dark:hover:bg-momo-950 ${isActive
-                    ? 'text-momo-500 font-bold dark:text-momo-400'
-                    : 'text-[var(--text-secondary)] font-medium'
-                    }`}
+                  className={`rounded-lg px-3.5 py-2 text-sm transition-all hover:bg-gray-50 hover:text-momo-700 ${
+                    isActive
+                      ? 'bg-momo-50 font-semibold text-momo-700'
+                      : 'font-medium text-gray-600'
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -80,48 +70,45 @@ export function Header() {
             })}
           </nav>
 
-          {/* ── CTA Button + Mobile Toggle ──── */}
-          <div className="flex items-center gap-3">
-            {/* CTA – Deep link đến App MoMo */}
+          {/* ── CTA + Mobile Toggle ──────────── */}
+          <div className="flex items-center gap-2.5">
+            {/* Badge Ví Trả Sau – compact */}
+            <span className="hidden items-center gap-1 rounded-full border border-momo-200 bg-momo-50 px-2.5 py-1 text-[11px] font-semibold text-momo-700 lg:inline-flex">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1" y="4" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                <path d="M1 7h14" stroke="currentColor" strokeWidth="1.5"/>
+              </svg>
+              Ví Trả Sau
+            </span>
+
+            {/* CTA Button – FIX: text-white thay vì text-black */}
             <Link
               href={SITE_CONFIG.appDeepLink}
-              className="inline-flex items-center gap-2 rounded-full bg-momo-700 px-5 py-2.5 text-sm font-semibold text-white shadow-momo transition-all hover:bg-momo-600 hover:shadow-lg active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 rounded-full bg-momo-700 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-momo-600 hover:shadow-lg active:scale-[0.97]"
               aria-label="Mở ứng dụng MoMo"
             >
               <span className="hidden sm:inline">Mở App MoMo</span>
               <span className="sm:hidden">Mở App</span>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6 3L11 8L6 13"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
 
-            {/* Mobile menu toggle */}
+            {/* Mobile toggle */}
             <button
               onClick={toggleMenu}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-[var(--text-secondary)] transition-colors hover:bg-momo-50 md:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-50 text-gray-600 transition-colors hover:bg-momo-50 hover:text-momo-700 md:hidden"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={isMobileMenuOpen ? 'Đóng menu' : 'Mở menu'}
             >
               {isMobileMenuOpen ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               )}
             </button>
@@ -132,22 +119,22 @@ export function Header() {
         {isMobileMenuOpen && (
           <nav
             id="mobile-menu"
-            className="animate-fade-in border-t border-[var(--border-default)] pb-4 pt-2 md:hidden"
+            className="border-t border-gray-100 pb-4 pt-3 md:hidden"
             aria-label="Menu di động"
           >
-            <ul className="space-y-1">
+            <ul className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => {
-                const isActive = link.href.startsWith('/') && (pathname === link.href || pathname.startsWith(link.href + '/'));
-
+                const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
                 return (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className={`block rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-momo-50 hover:text-momo-700 ${isActive
-                        ? 'text-momo-500 font-bold dark:text-momo-400'
-                        : 'text-[var(--text-secondary)] font-medium'
-                        }`}
+                      className={`block rounded-xl px-4 py-3 text-[15px] transition-colors ${
+                        isActive
+                          ? 'bg-momo-50 font-semibold text-momo-700'
+                          : 'font-medium text-gray-600 hover:bg-gray-50'
+                      }`}
                     >
                       {link.label}
                     </Link>
@@ -155,6 +142,16 @@ export function Header() {
                 );
               })}
             </ul>
+            {/* Mobile Ví Trả Sau badge */}
+            <div className="mt-3 flex items-center gap-2 px-4">
+              <span className="inline-flex items-center gap-1 rounded-full border border-momo-200 bg-momo-50 px-3 py-1.5 text-xs font-semibold text-momo-700">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <rect x="1" y="4" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  <path d="M1 7h14" stroke="currentColor" strokeWidth="1.5"/>
+                </svg>
+                Chấp nhận Ví Trả Sau
+              </span>
+            </div>
           </nav>
         )}
       </div>

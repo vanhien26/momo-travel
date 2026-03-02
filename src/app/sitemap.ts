@@ -36,5 +36,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...servicePages, ...destinationPages];
+  /* ── Tỷ giá (Exchange Rate) Pages ──── */
+  const exchangeRateHub: MetadataRoute.Sitemap = [{
+    url: `${baseUrl}/ty-gia`,
+    lastModified: new Date(),
+    changeFrequency: 'daily' as const,
+    priority: 0.9,
+  }];
+
+  const currencySlugs = [
+    'vnd-jpy', 'vnd-krw', 'vnd-thb', 'vnd-sgd',
+    'vnd-twd', 'vnd-myr', 'vnd-usd', 'vnd-cny',
+  ];
+
+  const currencyPages: MetadataRoute.Sitemap = currencySlugs.map((slug) => ({
+    url: `${baseUrl}/ty-gia/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...servicePages, ...exchangeRateHub, ...currencyPages, ...destinationPages];
 }
