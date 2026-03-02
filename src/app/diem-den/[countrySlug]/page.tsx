@@ -4,16 +4,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { COUNTRIES } from '@/data/destinations';
 
+// Sửa interface
 interface PageProps {
-    params: {
-        countrySlug: string;
-    };
+  params: { countrySlug: string };
 }
 
-export function generateStaticParams() {
-    return COUNTRIES.map((country) => ({
-        countrySlug: country.slug,
-    }));
+// Sửa hàm component
+export default function CountryPage({ params }: PageProps) {
+  const { countrySlug } = params;
+  // Cập nhật các hàm find dữ liệu sử dụng countrySlug thay vì slug
+  // ...
+}));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
