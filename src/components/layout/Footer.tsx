@@ -16,9 +16,9 @@ export function Footer() {
       role="contentinfo"
     >
       <div className="container-content py-10 lg:py-14">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link
               href="/"
               className="inline-flex items-center gap-2 text-lg font-bold text-momo-700"
@@ -92,6 +92,22 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               {FOOTER_LINKS.destinations.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-gray-500 transition-colors hover:text-momo-700">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Blog */}
+          <nav aria-label="Blog du lịch">
+            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-900">
+              Blog
+            </h3>
+            <ul className="space-y-2">
+              {FOOTER_LINKS.blog.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-gray-500 transition-colors hover:text-momo-700">
                     {link.label}

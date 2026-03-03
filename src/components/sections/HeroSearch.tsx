@@ -120,7 +120,7 @@ export function HeroSearch() {
         </div>
         <button
           type="submit"
-          className="bg-momo-600 hover:bg-momo-700 text-white px-6 py-3.5 sm:px-8 sm:py-4 font-bold transition-colors text-sm sm:text-base shrink-0"
+          className="bg-momo-700 hover:bg-momo-600 text-white px-6 py-3.5 sm:px-8 sm:py-4 font-bold transition-colors text-sm sm:text-base shrink-0"
         >
           Tìm kiếm
         </button>

@@ -65,10 +65,12 @@ export const MOMO_ENTITY = {
 /* ── Navigation ─────────────────────────────── */
 export const NAV_LINKS: NavLink[] = [
   { label: 'Điểm đến', href: '/diem-den' },
-  { label: 'SIM Du lịch', href: '/esim' },
+  { label: 'eSIM', href: '/esim' },
   { label: 'Vé máy bay', href: '/ve-may-bay' },
   { label: 'Khách sạn', href: '/khach-san' },
+  { label: 'Thanh toán', href: '/thanh-toan' },
   { label: 'Tỷ giá', href: '/ty-gia' },
+  { label: 'Blog', href: '/blog' },
 ];
 
 /* ── Travel Services (Value Proposition) ─────── */
@@ -318,22 +320,28 @@ export const FAQ_DATA: FAQItem[] = [
 /* ── Footer SEO Links ────────────────────────── */
 export const FOOTER_LINKS = {
   services: [
-    { label: 'SIM Du lịch Nhật Bản', href: '/sim/nhat-ban' },
-    { label: 'SIM Du lịch Hàn Quốc', href: '/sim/han-quoc' },
-    { label: 'SIM Du lịch Thái Lan', href: '/sim/thai-lan' },
-    { label: 'SIM Du lịch Singapore', href: '/sim/singapore' },
-    { label: 'Vé bay Đà Nẵng', href: '/ve-bay/da-nang' },
-    { label: 'Vé bay Phú Quốc', href: '/ve-bay/phu-quoc' },
-    { label: 'Khách sạn Đà Lạt', href: '/khach-san/da-lat' },
-    { label: 'Khách sạn Nha Trang', href: '/khach-san/nha-trang' },
+    { label: 'eSIM Nhật Bản', href: '/esim/nhat-ban' },
+    { label: 'eSIM Hàn Quốc', href: '/esim/han-quoc' },
+    { label: 'eSIM Thái Lan', href: '/esim/thai-lan' },
+    { label: 'eSIM Singapore', href: '/esim/singapore' },
+    { label: 'Vé máy bay', href: '/ve-may-bay' },
+    { label: 'Thanh toán quốc tế', href: '/thanh-toan' },
+    { label: 'Khách sạn Đà Lạt', href: '/khach-san/viet-nam/da-lat' },
+    { label: 'Khách sạn Phú Quốc', href: '/khach-san/viet-nam/phu-quoc' },
   ],
   destinations: [
     { label: 'Du lịch Nhật Bản', href: '/diem-den/nhat-ban' },
     { label: 'Du lịch Hàn Quốc', href: '/diem-den/han-quoc' },
     { label: 'Du lịch Thái Lan', href: '/diem-den/thai-lan' },
     { label: 'Du lịch Singapore', href: '/diem-den/singapore' },
-    { label: 'Du lịch Bali', href: '/diem-den/bali' },
-    { label: 'Du lịch Đài Loan', href: '/diem-den/dai-loan' },
+    { label: 'Đà Lạt', href: '/diem-den/viet-nam/da-lat' },
+    { label: 'Phú Quốc', href: '/diem-den/viet-nam/phu-quoc' },
+  ],
+  blog: [
+    { label: 'Kinh nghiệm du lịch', href: '/blog/kinh-nghiem' },
+    { label: 'Mẹo tiết kiệm', href: '/blog/meo-tiet-kiem' },
+    { label: 'Điểm đến hot', href: '/blog/diem-den-hot' },
+    { label: 'Ẩm thực châu Á', href: '/blog/am-thuc' },
   ],
   company: [
     { label: 'Về MoMo', href: 'https://momo.vn/gioi-thieu' },

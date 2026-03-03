@@ -15,9 +15,11 @@ import { generateBreadcrumbSchema } from '@/lib/schema';
 
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
+  /** Light mode cho nền tối (hero sections) */
+  light?: boolean;
 }
 
-export function Breadcrumb({ items }: BreadcrumbProps) {
+export function Breadcrumb({ items, light = false }: BreadcrumbProps) {
   const schema = generateBreadcrumbSchema(items);
 
   return (
@@ -31,9 +33,9 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       {/* Visual breadcrumb */}
       <nav
         aria-label="Đường dẫn"
-        className="container-content py-3"
+        className={light ? '' : 'container-content py-3'}
       >
-        <ol className="flex flex-wrap items-center gap-1 text-sm text-[var(--text-muted)]">
+        <ol className={`flex flex-wrap items-center gap-1 text-sm ${light ? 'text-white/50' : 'text-[var(--text-muted)]'}`}>
           {items.map((item, index) => {
             const isLast = index === items.length - 1;
             return (
@@ -44,13 +46,13 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                   </svg>
                 )}
                 {isLast ? (
-                  <span className="font-medium text-[var(--text-primary)]" aria-current="page">
+                  <span className={`font-medium ${light ? 'text-white/80' : 'text-[var(--text-primary)]'}`} aria-current="page">
                     {item.name}
                   </span>
                 ) : (
                   <Link
                     href={item.href}
-                    className="transition-colors hover:text-momo-700"
+                    className={`transition-colors ${light ? 'hover:text-white' : 'hover:text-momo-700'}`}
                   >
                     {item.name}
                   </Link>

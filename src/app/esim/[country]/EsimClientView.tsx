@@ -95,8 +95,9 @@ export function EsimClientView({ country, countrySlug }: EsimClientViewProps) {
                         </div>
                     </div>
                     <Button
-                        href={`/sim-du-lich/${countrySlug}/${selectedPackage?.id}`}
-                        className="w-auto px-6 lg:px-10 bg-momo-500 hover:bg-momo-600 text-white font-bold"
+                        href={`/esim/${countrySlug}/${selectedPackage?.id}`}
+                        variant="primary"
+                        size="lg"
                         ariaLabel={`Mua ngay gói ${selectedPackage?.days} ngày`}
                     >
                         Thanh toán ngay

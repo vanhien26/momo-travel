@@ -110,7 +110,7 @@ export default function DestinationHubPage() {
                             />
                             <button
                                 type="submit"
-                                className="bg-momo-500 hover:bg-momo-600 text-white px-8 py-5 h-full font-bold transition-colors"
+                                className="bg-momo-700 hover:bg-momo-600 text-white px-8 py-5 h-full font-bold transition-colors"
                             >
                                 Tìm kiếm
                             </button>

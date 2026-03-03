@@ -186,14 +186,17 @@ export default function LocationDetailPage({ params }: PageProps) {
                         nhanh chóng, an toàn chỉ với vài chạm.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
-                        <Button href="/ve-may-bay" className="bg-momo-600 hover:bg-momo-700 text-white px-8 py-3">
+                        <Button href="/ve-may-bay" variant="primary" size="md">
                             Đặt vé máy bay
                         </Button>
-                        <Button href="/khach-san" className="bg-white text-momo-700 border border-momo-200 px-8 py-3">
+                        <Button
+                            href={`/khach-san/${location.slug}`}
+                            className="bg-white text-momo-700 border border-momo-200 px-8 py-3"
+                        >
                             Tìm khách sạn
                         </Button>
                         {hasEsim && (
-                            <Button href="/esim" className="bg-momo-100 text-momo-800 border border-momo-200 px-8 py-3">
+                            <Button href="/esim" variant="secondary" size="md">
                                 Mua eSIM du lịch
                             </Button>
                         )}
