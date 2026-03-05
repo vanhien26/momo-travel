@@ -190,7 +190,7 @@ export default function LocationDetailPage({ params }: PageProps) {
                             Đặt vé máy bay
                         </Button>
                         <Button
-                            href={`/khach-san/${location.slug}`}
+                            href={`/khach-san/${country.slug}/${location.slug}`}
                             className="bg-white text-momo-700 border border-momo-200 px-8 py-3"
                         >
                             Tìm khách sạn

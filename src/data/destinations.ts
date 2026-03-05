@@ -64,7 +64,7 @@ export const COUNTRIES: Country[] = [
       {
         name: 'Hội An',
         slug: 'hoi-an',
-        image: '/images/destinations/thailand.jpg',
+        image: '/images/destinations/hoi-an.jpg',
         flightPrice: 650000,
         hotelPrice: 600000,
         eSimPrice: 0,
@@ -73,7 +73,7 @@ export const COUNTRIES: Country[] = [
       {
         name: 'Huế',
         slug: 'hue',
-        image: '/images/destinations/thailand.jpg',
+        image: '/images/destinations/hue.jpg',
         flightPrice: 580000,
         hotelPrice: 550000,
         eSimPrice: 0,
@@ -82,7 +82,7 @@ export const COUNTRIES: Country[] = [
       {
         name: 'Hà Nội',
         slug: 'ha-noi',
-        image: '/images/destinations/thailand.jpg',
+        image: '/images/destinations/sapa.jpg',
         flightPrice: 850000,
         hotelPrice: 900000,
         eSimPrice: 0,

@@ -13,10 +13,9 @@ interface HeroSectionProps {
 export function HeroSection({
   title = (
     <>
-      Du Lịch Châu Á
-      <br />
+      Du Lịch{" "}
       <span className="bg-gradient-to-r from-travel-sand via-momo-300 to-travel-sky bg-clip-text text-transparent">
-        Thanh Toán Thông Minh Cùng MoMo
+        cùng MoMo
       </span>
     </>
   ),
@@ -66,8 +65,8 @@ export function HeroSection({
             {/* Badge Ví Trả Sau */}
             <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-travel-sand" aria-hidden="true">
-                <rect x="1" y="4" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                <path d="M1 7h14" stroke="currentColor" strokeWidth="1.5"/>
+                <rect x="1" y="4" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                <path d="M1 7h14" stroke="currentColor" strokeWidth="1.5" />
               </svg>
               <span className="text-xs font-medium text-white/70">Ví Trả Sau 0%</span>
             </div>

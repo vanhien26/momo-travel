@@ -1,27 +1,65 @@
-import { HeroSection } from '@/components/sections/HeroSection';
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import { ValueProposition } from '@/components/sections/ValueProposition';
 import { UseCases } from '@/components/sections/UseCases';
 import { TrustSignals } from '@/components/sections/TrustSignals';
 import { ComparisonTable } from '@/components/sections/ComparisonTable';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTABlock } from '@/components/sections/CTABlock';
-import { SITE_CONFIG } from '@/lib/constants';
+import { FlightSearchBar } from './FlightSearchBar';
+import { Button } from '@/components/ui/Button';
+
+export const metadata: Metadata = {
+  title: 'Vé Máy Bay Giá Rẻ | Đặt Vé Bay Cùng MoMo',
+  description:
+    'So sánh giá vé từ Vietnam Airlines, VietJet, Bamboo Airways và 50+ hãng bay. Thanh toán 1 chạm, nhận e-ticket ngay, hoàn tiền đến 5%.',
+};
 
 export default function VeMayBayPage() {
     return (
         <>
-            <HeroSection
-                title={
-                    <>
-                        Vé Máy Bay Giá Rẻ
-                        <br />
-                        <span className="bg-gradient-to-r from-travel-sand via-momo-300 to-travel-sky bg-clip-text text-transparent">
-                            Chạm Là Bay Cùng MoMo
-                        </span>
-                    </>
-                }
-                description="So sánh giá vé từ Vietnam Airlines, VietJet, Bamboo Airways và 50+ hãng bay quốc tế. Thanh toán 1 chạm, nhận e-ticket ngay trên MoMo. Hoàn tiền lên đến 5%."
-            />
+            {/* Hero – Flight search */}
+            <section className="relative overflow-hidden bg-slate-950 text-white">
+                <div className="absolute inset-0">
+                    <Image
+                        src="/images/destinations/da-nang.jpg"
+                        alt="Vé máy bay"
+                        fill
+                        className="object-cover opacity-60"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-momo-900/50 to-black/80" />
+                </div>
+                <div className="container-content relative py-12 sm:py-16 lg:py-20">
+                    <div className="max-w-2xl">
+                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-momo-200">
+                            Vé máy bay
+                        </p>
+                        <h1 className="mt-4 text-4xl font-extrabold leading-tight sm:text-5xl">
+                            Vé Máy Bay Giá Rẻ
+                            <span className="block bg-gradient-to-r from-travel-sand via-momo-300 to-travel-sky bg-clip-text text-transparent">
+                                Chạm Là Bay Cùng MoMo
+                            </span>
+                        </h1>
+                        <p className="mt-4 max-w-xl text-base text-white/85 sm:text-lg">
+                            So sánh giá vé từ Vietnam Airlines, VietJet, Bamboo Airways và 50+ hãng bay quốc tế.
+                            Thanh toán 1 chạm, nhận e-ticket ngay trên MoMo. Hoàn tiền lên đến 5%.
+                        </p>
+                    </div>
+                    <FlightSearchBar />
+                    <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-white/60">
+                        <span>✓ 50+ hãng bay</span>
+                        <span>✓ Hoàn tiền đến 5%</span>
+                        <span>✓ Ví Trả Sau 0%</span>
+                        <span>✓ E-ticket ngay trên app</span>
+                    </div>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                        <Button href="/ve-may-bay/san-bay" variant="dark" size="sm">
+                            Xem thông tin sân bay
+                        </Button>
+                    </div>
+                </div>
+            </section>
 
             <ValueProposition
                 title="Tại Sao Nên Đặt Vé Qua MoMo?"

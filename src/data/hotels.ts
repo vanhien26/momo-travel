@@ -2,7 +2,7 @@
 
 import { COUNTRIES } from './destinations';
 
-export type HotelType = 'Resort' | 'Hotel' | 'Homestay';
+export type HotelType = 'Resort' | 'Hotel' | 'Homestay' | 'Villa';
 
 export interface Hotel {
   id: string;
@@ -75,9 +75,25 @@ export const HOTELS: Hotel[] = COUNTRIES.flatMap((country) =>
         discountedPrice: Math.round(basePrice * 0.75),
         cashbackPercent: 4,
       },
+      {
+        id: `${baseId}-v4`,
+        name: `Villa Panorama ${loc.name}`,
+        slug: `${loc.slug}-villa`,
+        countrySlug: country.slug,
+        countryName: country.name,
+        citySlug: loc.slug,
+        cityName: loc.name,
+        type: 'Villa',
+        stars: 5,
+        address: `Villa cao cấp tại ${loc.name}`,
+        image: loc.image,
+        originalPrice: Math.round(basePrice * 1.6),
+        discountedPrice: Math.round(basePrice * 1.3),
+        cashbackPercent: 6,
+      },
     ];
 
-    return index % 2 === 0 ? variants.slice(0, 2) : variants.slice(1, 3);
+    return index % 3 === 0 ? variants : variants.slice(0, 3);
   }),
 ).flat();
 
