@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none">
+  <!-- M icon mark -->
+  <rect width="36" height="36" x="2" y="2" rx="10" fill="url(#g1)"/>
+  <path d="M10 28 L10 14 L18 22 L26 14 L26 28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Wordmark -->
+  <text x="46" y="16" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="13" fill="#2e1065">MoMo</text>
+  <text x="46" y="30" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="10" fill="#6d28d9">Travel</text>
+
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+</svg>
