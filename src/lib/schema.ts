@@ -73,6 +73,7 @@ export function destinationSchema(dest: {
   name: string
   description: string
   image: string
+  country: string
   slug: string
 }) {
   return {
@@ -81,7 +82,7 @@ export function destinationSchema(dest: {
     name: dest.name,
     description: dest.description,
     image: dest.image,
-    url: `${SITE_URL}/diem-den/${dest.slug}`,
+    url: `${SITE_URL}/diem-den/${dest.country}/${dest.slug}`,
     touristType: ['Adventure', 'Cultural', 'Beach', 'Family'],
   }
 }

@@ -14,11 +14,11 @@ export function FeaturedDestinations() {
         {/* Header */}
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-momo-600 font-semibold text-sm mb-1">✈️ Điểm đến nổi bật</p>
+            <p className="text-momo-600 font-semibold text-sm mb-1">Chưa biết đi đâu?</p>
             <h2 className="text-3xl font-black text-gray-900">
-              Khám phá <span className="text-momo-700">Đông Nam Á</span>
+              Gợi ý <span className="text-momo-700">chuyến đi</span> cho bạn
             </h2>
-            <p className="text-gray-500 mt-2">Vé máy bay + eSIM + Khách sạn – Giá tốt nhất chỉ trên MoMo</p>
+            <p className="text-gray-500 mt-2">Những điểm đến được yêu thích nhất — chọn một nơi và bắt đầu lập kế hoạch</p>
           </div>
           <Link
             href="/diem-den"
@@ -31,7 +31,7 @@ export function FeaturedDestinations() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {featured.map((dest) => (
-            <Link key={dest.id} href={`/diem-den/${dest.slug}`} className="group">
+            <Link key={dest.id} href={`/diem-den/${dest.country}/${dest.slug}`} className="group">
               <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">

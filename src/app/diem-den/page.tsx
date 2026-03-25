@@ -94,7 +94,7 @@ export default function DiemDenPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {domestic.map((dest) => (
-              <Link key={dest.id} href={`/diem-den/${dest.slug}`}>
+              <Link key={dest.id} href={`/diem-den/${dest.country}/${dest.slug}`}>
                 <DestCard dest={dest} />
               </Link>
             ))}
@@ -114,7 +114,7 @@ export default function DiemDenPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {international.map((dest) => (
-              <Link key={dest.id} href={`/diem-den/${dest.slug}`}>
+              <Link key={dest.id} href={`/diem-den/${dest.country}/${dest.slug}`}>
                 <DestCard dest={dest} />
               </Link>
             ))}
