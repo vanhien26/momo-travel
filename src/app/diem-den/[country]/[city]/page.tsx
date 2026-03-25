@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Plane, Hotel, Wifi, Calendar, ArrowRight, Check } from 'lucide-react'
-import { destinations } from '@/data/destinations'
+import { destinations, countries } from '@/data/destinations'
 import { hotels, getHotelsByDestination } from '@/data/hotels'
 import { formatVND, SITE_NAME } from '@/lib/constants'
 import { Badge } from '@/components/ui/Badge'
@@ -11,15 +11,24 @@ import { JsonLd } from '@/components/seo/SchemaMarkup'
 import { destinationSchema, breadcrumbSchema } from '@/lib/schema'
 
 interface Props {
-  params: { slug: string }
+  params: { country: string; city: string }
+}
+
+function findDestination(country: string, city: string) {
+  return destinations.find((d) => d.country === country && d.slug === city)
+}
+
+function getCountryName(countrySlug: string): string {
+  const country = countries.find((c) => c.slug === countrySlug)
+  return country?.name ?? countrySlug
 }
 
 export async function generateStaticParams() {
-  return destinations.map((d) => ({ slug: d.slug }))
+  return destinations.map((d) => ({ country: d.country, city: d.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const dest = destinations.find((d) => d.slug === params.slug)
+  const dest = findDestination(params.country, params.city)
   if (!dest) return {}
   return {
     title: `Du lịch ${dest.name} – Vé bay từ ${formatVND(dest.flightFrom)}`,
@@ -33,9 +42,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function DestinationPage({ params }: Props) {
-  const dest = destinations.find((d) => d.slug === params.slug)
+  const dest = findDestination(params.country, params.city)
   if (!dest) notFound()
 
+  const countryName = getCountryName(params.country)
   const destHotels = getHotelsByDestination(dest.id)
   const relatedDests = destinations
     .filter((d) => d.id !== dest.id && d.country === dest.country)
@@ -43,8 +53,13 @@ export default function DestinationPage({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={destinationSchema({ name: dest.name, description: dest.description, image: dest.image, slug: dest.slug })} />
-      <JsonLd data={breadcrumbSchema([{ name: 'Trang chủ', href: '/' }, { name: 'Điểm đến', href: '/diem-den' }, { name: dest.name, href: `/diem-den/${dest.slug}` }])} />
+      <JsonLd data={destinationSchema({ name: dest.name, description: dest.description, image: dest.image, country: dest.country, slug: dest.slug })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: 'Trang chủ', href: '/' },
+        { name: 'Điểm đến', href: '/diem-den' },
+        { name: countryName, href: `/diem-den/${dest.country}` },
+        { name: dest.name, href: `/diem-den/${dest.country}/${dest.slug}` },
+      ])} />
 
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[400px] flex items-end">
@@ -64,15 +79,17 @@ export default function DestinationPage({ params }: Props) {
             <span>/</span>
             <Link href="/diem-den" className="hover:text-white">Điểm đến</Link>
             <span>/</span>
+            <span className="hover:text-white">{countryName}</span>
+            <span>/</span>
             <span className="text-white">{dest.name}</span>
           </nav>
 
           <div className="flex flex-wrap gap-2 mb-3">
             {dest.region === 'international' && (
-              <Badge variant="blue" size="sm">🌏 Quốc tế</Badge>
+              <Badge variant="blue" size="sm">Quốc tế</Badge>
             )}
             {dest.hasEsim && (
-              <Badge variant="blue" size="sm">📡 eSIM có sẵn</Badge>
+              <Badge variant="blue" size="sm">eSIM có sẵn</Badge>
             )}
             {dest.tags.slice(0, 3).map((t) => (
               <Badge key={t} variant="gray" size="sm" className="bg-white/20 text-white border border-white/20">{t}</Badge>
@@ -125,7 +142,7 @@ export default function DestinationPage({ params }: Props) {
 
             {/* Highlights */}
             <div>
-              <h2 className="text-xl font-black text-gray-900 mb-4">🗺️ Địa điểm nổi bật</h2>
+              <h2 className="text-xl font-black text-gray-900 mb-4">Địa điểm nổi bật</h2>
               <div className="grid grid-cols-2 gap-3">
                 {dest.highlights.map((hl) => (
                   <div key={hl} className="flex items-center gap-2 bg-momo-50 rounded-xl p-3">
@@ -140,7 +157,7 @@ export default function DestinationPage({ params }: Props) {
             {destHotels.length > 0 && (
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-black text-gray-900">🏨 Khách sạn nổi bật</h2>
+                  <h2 className="text-xl font-black text-gray-900">Khách sạn nổi bật</h2>
                   <Link href="/khach-san" className="text-momo-600 text-sm font-semibold hover:underline">
                     Xem tất cả →
                   </Link>
@@ -240,7 +257,7 @@ export default function DestinationPage({ params }: Props) {
                 <h3 className="font-black text-gray-900 mb-3">Điểm đến tương tự</h3>
                 <div className="space-y-3">
                   {relatedDests.map((r) => (
-                    <Link key={r.id} href={`/diem-den/${r.slug}`}>
+                    <Link key={r.id} href={`/diem-den/${r.country}/${r.slug}`}>
                       <div className="flex items-center gap-3 border border-gray-100 rounded-xl p-3 hover:shadow-sm transition-shadow">
                         <div className="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
                           <Image src={r.image} alt={r.name} fill className="object-cover" sizes="56px" />
