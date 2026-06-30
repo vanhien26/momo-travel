@@ -317,4 +317,15 @@ export const countries: Country[] = [
     description: 'Quê hương K-pop và K-drama với cung điện cổ kính, ẩm thực hấp dẫn.',
     image: getCountryImage('han-quoc'),
   },
+  {
+    id: 'singapore',
+    slug: 'singapore',
+    name: 'Singapore',
+    code: 'SG',
+    flag: '🇸🇬',
+    landmarkCount: 3,
+    destinations: ['singapore'],
+    description: 'Đảo quốc sư tử với kiến trúc hiện đại, ẩm thực đa văn hóa và mua sắm đẳng cấp.',
+    image: getCountryImage('singapore'),
+  },
 ]
